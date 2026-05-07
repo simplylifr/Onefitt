@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENSATIONAL BODY 💎 - Programme Complet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0f0607 0%, #2a1419 50%, #0f0607 100%);
+            color: #f5e6d3;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+        .header {
+            background: linear-gradient(180deg, rgba(255, 107, 157, 0.25) 0%, rgba(255, 107, 157, 0.05) 100%);
+            padding: 40px 20px 30px;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 107, 157, 0.3);
+        }
+        .header-subtitle {
+            font-size: 11px;
+            letter-spacing: 8px;
+            color: #FF6B9D;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f5e6d3, #FF6B9D, #FFB6C1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+        .header-info {
+            font-size: 13px;
+            color: rgba(255, 107, 157, 0.8);
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .tabs {
+            display: flex;
+            padding: 20px 16px 0;
+            gap: 8px;
+            overflow-x: auto;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 12px 8px;
+            border-radius: 14px;
+            border: none;
+            background: rgba(255,255,255,0.05);
+            color: rgba(245,230,211,0.6);
+            font-size: 11px;
+            font-weight: normal;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 80px;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #FF6B9D, #FF8C42);
+            color: #fff;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px 16px;
+        }
+        .hidden {
+            display: none;
+        }
+        .day-selector {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        .day-btn {
+            padding: 12px 10px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            color: rgba(245,230,211,0.5);
+            cursor: pointer;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 10px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        .day-btn.active {
+            border: 2px solid #FF6B9D;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.4), rgba(255, 107, 157, 0.2));
+            color: #fff;
+        }
+        .day-emoji { font-size: 18px; margin-bottom: 2px; }
+        .day-name { font-weight: bold; letter-spacing: 1px; }
+        .day-info {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.3), rgba(255, 107, 157, 0.1));
+            border: 2px solid rgba(255, 107, 157, 0.5);
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .day-info-emoji { font-size: 40px; flex-shrink: 0; }
+        .day-info-text h2 {
+            font-size: 11px;
+            color: #FF6B9D;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .day-cals {
+            font-size: 18px;
+            font-weight: bold;
+            color: #FF6B9D;
+        }
+        .exercise {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .exercise.expanded {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.25), rgba(255, 107, 157, 0.1));
+            border-radius: 14px 14px 0 0;
+            border: 2px solid rgba(255, 107, 157, 0.5);
+        }
+        .exercise-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255, 107, 157, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #FF6B9D;
+            flex-shrink: 0;
+        }
+        .exercise-info { flex: 1; }
+        .exercise-name {
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .exercise-muscle {
+            font-size: 11px;
+            color: rgba(245,230,211,0.5);
+            margin-top: 2px;
+        }
+        .exercise-macros {
+            text-align: right;
+            flex-shrink: 0;
+            font-size: 11px;
+            color: #FF6B9D;
+            font-weight: bold;
+        }
+        .exercise-details {
+            background: rgba(255, 107, 157, 0.08);
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            border-top: none;
+            border-radius: 0 0 14px 14px;
+            padding: 16px;
+        }
+        .exercise-tip {
+            background: rgba(255, 107, 157, 0.15);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 11px;
+            color: #FF6B9D;
+            border-left: 4px solid #FF6B9D;
+            margin-top: 12px;
+        }
+        .section-title {
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #FFB6C1;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .cardio-box {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(255, 107, 157, 0.05));
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            border-radius: 14px;
+            padding: 16px;
+            margin-top: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .cardio-box-emoji { font-size: 28px; }
+        .warmup-item, .stretch-item {
+            background: rgba(255, 107, 157, 0.1);
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .warmup-item > div:first-child, .stretch-item > div:first-child {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-subtitle">✨ Programme Premium 3 Mois ✨</div>
+        <h1>SENSATIONAL BODY 💎</h1>
+        <div class="header-info">87-90kg → 73kg | MATIN Abdos + SOIR Programme | Perte graisse MAXIMALE</div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('matin')">🌅 Matin</button>
+        <button class="tab-btn" onclick="showTab('programme')">📋 Soir</button>
+        <button class="tab-btn" onclick="showTab('warmup')">🔥 Échauffement</button>
+        <button class="tab-btn" onclick="showTab('stretch')">🧘 Stretching</button>
+    </div>
+
+    <div id="matin" class="content">
+        <h2 style="text-align: center; color: #FFB6C1; margin-bottom: 6px;">🌅 MATIN — Quotidien</h2>
+        <p style="text-align: center; font-size: 12px; color: rgba(245,230,211,0.5); margin-bottom: 20px;">20-25 min | MÊME LES JOURS DE REPOS 😴</p>
+        
+        <div class="section-title">CARDIO LÉGER (10 min)</div>
+        <div class="warmup-item">
+            <div>⚡</div>
+            <div>
+                <div style="font-weight: bold;">Corde à Sauter HIIT</div>
+                <div style="font-size: 12px; color: #FF6B9D;">5 × 1min ON / 30s OFF</div>
+            </div>
+        </div>
+        <div class="warmup-item">
+            <div>🏃</div>
+            <div>
+                <div style="font-weight: bold;">Marche Rapide / Jogging</div>
+                <div style="font-size: 12px; color: #FF6B9D;">1 × 2.5 min</div>
+            </div>
+        </div>
+
+        <div class="section-title" style="margin-top: 20px;">ABDOS EXPLOSIFS (10-15 min)</div>
+        <div class="warmup-item">
+            <div>✨</div>
+            <div>
+                <div style="font-weight: bold;">Vacuum Abdominal ⭐⭐⭐</div>
+                <div style="font-size: 12px; color: #FF6B9D;">3 × 45s | Taille fine ULTIME</div>
+            </div>
+        </div>
+        <div class="warmup-item">
+            <div>💪</div>
+            <div>
+                <div style="font-weight: bold;">Crunch Machine ⭐⭐⭐</div>
+                <div style="font-size: 12px; color: #FF6B9D;">3 × 15 | Abdos VISIBLES</div>
+            </div>
+        </div>
+        <div class="warmup-item">
+            <div>🔥</div>
+            <div>
+                <div style="font-weight: bold;">Leg Raises ⭐⭐⭐</div>
+                <div style="font-size: 12px; color: #FF6B9D;">3 × 12 | Abdos bas définis</div>
+            </div>
+        </div>
+        <div class="warmup-item">
+            <div>🌪️</div>
+            <div>
+                <div style="font-weight: bold;">Russian Twist Poids ⭐⭐⭐</div>
+                <div style="font-size: 12px; color: #FF6B9D;">3 × 20/côté | Taille fine</div>
+            </div>
+        </div>
+        <div class="warmup-item">
+            <div>🚴</div>
+            <div>
+                <div style="font-weight: bold;">Bicycle Crunch ⭐⭐</div>
+                <div style="font-size: 12px; color: #FF6B9D;">2 × 20 | Symétrie</div>
+            </div>
+        </div>
+        <div class="warmup-item">
+            <div>✨</div>
+            <div>
+                <div style="font-weight: bold;">Planche Classique ⭐⭐⭐</div>
+                <div style="font-size: 12px; color: #FF6B9D;">2 × 60s | Gainage profond</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="programme" class="content hidden">
+        <div class="day-selector" id="daySelector"></div>
+        <div id="dayInfo"></div>
+        <div id="exercises"></div>
+    </div>
+
+    <div id="warmup" class="content hidden">
+        <h2 style="text-align: center; color: #FFB6C1; margin-bottom: 20px;">🔥 Échauffement</h2>
+        <div class="warmup-item">
+            <div>⭐</div>
+            <div><div style="font-weight: bold;">Jumping Jacks</div><div style="font-size: 12px; color: #FF6B9D;">30s</div></div>
+        </div>
+        <div class="warmup-item">
+            <div>🦵</div>
+            <div><div style="font-weight: bold;">Knee Raise</div><div style="font-size: 12px; color: #FF6B9D;">30s</div></div>
+        </div>
+        <div class="warmup-item">
+            <div>👊</div>
+            <div><div style="font-weight: bold;">Squat with Punch</div><div style="font-size: 12px; color: #FF6B9D;">30s</div></div>
+        </div>
+        <div class="warmup-item">
+            <div>🚶</div>
+            <div><div style="font-weight: bold;">Lunges</div><div style="font-size: 12px; color: #FF6B9D;">30s</div></div>
+        </div>
+        <div class="warmup-item">
+            <div>🏃</div>
+            <div><div style="font-weight: bold;">Butt Kicks</div><div style="font-size: 12px; color: #FF6B9D;">30s</div></div>
+        </div>
+    </div>
+
+    <div id="stretch" class="content hidden">
+        <h2 style="text-align: center; color: #D4A574; margin-bottom: 20px;">🧘 Stretching</h2>
+        <div class="stretch-item">
+            <div>🧘</div>
+            <div><div style="font-weight: bold;">Ischio-jambiers</div><div style="font-size: 12px; color: #D4A574;">30s/côté</div></div>
+        </div>
+        <div class="stretch-item">
+            <div>🍑</div>
+            <div><div style="font-weight: bold;">Fessiers</div><div style="font-size: 12px; color: #D4A574;">30s/côté</div></div>
+        </div>
+        <div class="stretch-item">
+            <div>🦵</div>
+            <div><div style="font-weight: bold;">Adducteurs</div><div style="font-size: 12px; color: #D4A574;">30s</div></div>
+        </div>
+        <div class="stretch-item">
+            <div>🔙</div>
+            <div><div style="font-weight: bold;">Dos</div><div style="font-size: 12px; color: #D4A574;">30s</div></div>
+        </div>
+        <div class="stretch-item">
+            <div>💪</div>
+            <div><div style="font-weight: bold;">Quadriceps</div><div style="font-size: 12px; color: #D4A574;">30s/côté</div></div>
+        </div>
+    </div>
+
+    <script>
+        const days = [
+            {
+                day: "LUNDI",
+                emoji: "🍑",
+                color: "#FF6B9D",
+                label: "Booty Énorme",
+                cardio: "🚶‍♀️ Marche inclinée 10-12% — 25 min — 5-6 km/h",
+                exercises: [
+                    { name: "Hip Thrust Barre", sets: "5", reps: "8-12", muscle: "Fessiers", priority: "⭐⭐⭐", desc: "Dos contre banc, barre sur hanches. Pousser bassin EXPLOSIF !", tip: "SIGNATURE MOVE — squeeze EXPLOSIF en haut !" },
+                    { name: "Cable Kickbacks", sets: "4", reps: "15/jambe", muscle: "Fessiers", priority: "⭐⭐⭐", desc: "Poulie basse autour cheville. Ramener jambe arrière avec SQUEEZE.", tip: "REBONDIS — squeeze à chaque rep !" },
+                    { name: "Squat Sumo Barbell", sets: "3", reps: "10-12", muscle: "Fessiers + Hanches", priority: "⭐⭐", desc: "Pieds écartés, pointes vers l'ext. Descendre PROFOND.", tip: "Élargit les hanches visuellement" },
+                    { name: "Smith Machine Hip Thrust", sets: "4", reps: "10-12", muscle: "Fessiers", priority: "⭐⭐", desc: "Variation Hip Thrust. Stabilité maximale.", tip: "Alternative pour PLUS d'intensité" },
+                    { name: "Single Leg Hip Thrust", sets: "4", reps: "12/jambe", muscle: "Fessiers", priority: "⭐⭐⭐", desc: "Hip thrust unilatéral. Bande élastique.", tip: "Rebondis MOELLEUX — équilibre" },
+                    { name: "Leg Curls", sets: "4", reps: "12-15", muscle: "Ischio-jambiers", priority: "⭐⭐⭐", desc: "À plat ventre. Ramener talons vers fesses.", tip: "RONDEUR arrière — moelleux rebondis !" },
+                    { name: "Vacuum Abdominal", sets: "3", reps: "30s", muscle: "Transverse", priority: "⭐⭐⭐", desc: "Expirer, rentrer le ventre MAXIMUM.", tip: "Ventre plat ULTIME — taille fine !" }
+                ]
+            },
+            {
+                day: "MARDI",
+                emoji: "🏋️",
+                color: "#FF8C42",
+                label: "Booty Barre",
+                cardio: "🚶‍♀️ Marche inclinée 10-12% — 25 min — 5-6 km/h",
+                exercises: [
+                    { name: "Barbell Deadlift", sets: "4", reps: "10-12", muscle: "Fessiers + Dos", priority: "⭐⭐⭐", desc: "Barre au sol. Soulever en explosant.", tip: "Fessiers EXPLOSIFS — engage abdos" },
+                    { name: "Hip Thrust Barre", sets: "5", reps: "10-12", muscle: "Fessiers", priority: "⭐⭐⭐", desc: "Dos contre banc. Pousser FORT.", tip: "Maintenir 2s en haut — SQUEEZE maximal !" },
+                    { name: "Barbell Squat Sumo", sets: "4", reps: "10-12", muscle: "Fessiers + Hanches", priority: "⭐⭐", desc: "Pieds au-delà épaules. Descendre PROFOND.", tip: "Hanches développées + fessiers" },
+                    { name: "Cable Pull Through", sets: "3", reps: "15", muscle: "Fessiers", priority: "⭐⭐", desc: "Dos à poulie. Tendre jambes.", tip: "Isole PARFAITEMENT — définition" },
+                    { name: "Single Leg Hip Thrust", sets: "3", reps: "12/jambe", muscle: "Fessiers", priority: "⭐⭐", desc: "Hip thrust unilatéral.", tip: "Rebondis symétriques moelleux" },
+                    { name: "Finisher Abdos", sets: "3", reps: "30s/exo", muscle: "Abdominaux", priority: "⭐⭐", desc: "5 exos enchaînés SANS pause.", tip: "Pas de pause ! Burn maximal" }
+                ]
+            },
+            {
+                day: "MERCREDI",
+                emoji: "🔙",
+                color: "#D4A574",
+                label: "Upper Body",
+                cardio: "🚶‍♀️ Marche inclinée 10-12% — 25 min — 5-6 km/h",
+                exercises: [
+                    { name: "Lat Pulldown serré", sets: "4", reps: "12-15", muscle: "Grand dorsal", priority: "⭐⭐⭐", desc: "Assis. Tirer jusqu'au torse. Dos tracé FÉMININ.", tip: "PRIORITÉ — dos tracé pas large !" },
+                    { name: "Cable Row prise serrée", sets: "4", reps: "10-12", muscle: "Dos milieu", priority: "⭐⭐⭐", desc: "Assis à machine. Poignée en V. Tirer vers ventre.", tip: "Prise serrée = trace sans élargir" },
+                    { name: "Straight Arm Pulldown", sets: "3", reps: "12-15", muscle: "Grand dorsal", priority: "⭐⭐", desc: "Debout. Bras tendus. Tirer vers cuisses.", tip: "Dessine le dos en V FÉMININ" },
+                    { name: "Rowing Haltère Unilatéral", sets: "3", reps: "12/côté", muscle: "Dos + Lombaires", priority: "⭐⭐", desc: "Genou et main sur banc. Tirer jusqu'à hanche.", tip: "Lombaires sans élargir — féminin !" },
+                    { name: "Planche Classique", sets: "3", reps: "45s", muscle: "Gainage", priority: "⭐⭐", desc: "Ligne droite. Coudes sous épaules.", tip: "Taille fine + gainage profond" },
+                    { name: "Vacuum Abdominal", sets: "3", reps: "30s", muscle: "Transverse", priority: "⭐⭐⭐", desc: "Expirer. Rentrer ventre MAXIMUM.", tip: "CLÉS TAILLE FINE — ventre plat !" }
+                ]
+            },
+            {
+                day: "JEUDI",
+                emoji: "⚙️",
+                color: "#C9B1A0",
+                label: "Booty Machines",
+                cardio: "🚶‍♀️ Marche inclinée 10-12% — 25 min — 5-6 km/h",
+                exercises: [
+                    { name: "Leg Curls", sets: "4", reps: "12-15", muscle: "Ischio-jambiers", priority: "⭐⭐⭐", desc: "À plat ventre. Ramener talons.", tip: "RONDEUR arrière — moelleux rebondis !" },
+                    { name: "Reverse Hack Squat pieds hauts", sets: "4", reps: "10-12", muscle: "Fessiers + Cuisses", priority: "⭐⭐", desc: "Face machine. Pieds HAUTS et écartés.", tip: "Pieds HAUTS = plus de fessiers" },
+                    { name: "Cable Kickbacks", sets: "4", reps: "15/jambe", muscle: "Fessiers", priority: "⭐⭐⭐", desc: "Poulie basse. Ramener jambe arrière.", tip: "REBONDIS — squeeze FORT !" },
+                    { name: "Hip Abductions Machine", sets: "4", reps: "15-20", muscle: "Abducteurs", priority: "⭐⭐⭐", desc: "Écarter jambes. Revenir doucement.", tip: "Élargit les hanches — 4 sets OBLIGATOIRE !" },
+                    { name: "Single Leg Hip Thrust", sets: "4", reps: "12/jambe", muscle: "Fessiers", priority: "⭐⭐⭐", desc: "Hip thrust unilatéral.", tip: "Rebondis symétriques MOELLEUX" },
+                    { name: "Cable Hip Abduction debout", sets: "3", reps: "15/jambe", muscle: "Abducteurs", priority: "⭐⭐", desc: "Lever jambe latéralement à poulie.", tip: "Hanches développées — élégance parisienne" }
+                ]
+            },
+            {
+                day: "SAMEDI",
+                emoji: "🔥",
+                color: "#E74C3C",
+                label: "HIIT + Cables",
+                cardio: "🚶‍♀️ Marche inclinée 10-12% — 25 min — 5-6 km/h",
+                exercises: [
+                    { name: "Jump Squats", sets: "3", reps: "15", muscle: "Full body", priority: "⭐⭐", desc: "Squat → saut explosif. Atterrir en contrôle.", tip: "Cardio intense — brûle GRAISSES !" },
+                    { name: "Burpees", sets: "3", reps: "15", muscle: "Full body", priority: "⭐⭐", desc: "Saut → squat → mains sol → pieds arrière → saut.", tip: "L'exo PLUS complet — brûle MAX !" },
+                    { name: "Crab Walk bande élastique", sets: "3", reps: "15", muscle: "Fessiers + Hanches", priority: "⭐⭐", desc: "Position squat avec bande. Pas sur côté SANS pause.", tip: "Brûle ET élargit les hanches" },
+                    { name: "Cable Pull Through", sets: "3", reps: "15", muscle: "Fessiers", priority: "⭐⭐", desc: "Dos à poulie. Tendre jambes.", tip: "Isole fessiers PARFAITEMENT" },
+                    { name: "Cable Kickbacks", sets: "3", reps: "15/jambe", muscle: "Fessiers", priority: "⭐⭐⭐", desc: "Poulie basse. Ramener jambe arrière.", tip: "Fessiers définition — mouvement LENT" },
+                    { name: "Corde à sauter", sets: "2", reps: "30s", muscle: "Cardio", priority: "⭐⭐", desc: "Sauts intenses. Sprint final.", tip: "Cardio FINAL — perte graisse MAXIMALE !" }
+                ]
+            }
+        ];
+
+        let currentDay = 0;
+        let expandedExercise = null;
+
+        function showTab(tabName) {
+            document.getElementById('matin').classList.add('hidden');
+            document.getElementById('programme').classList.add('hidden');
+            document.getElementById('warmup').classList.add('hidden');
+            document.getElementById('stretch').classList.add('hidden');
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            if (tabName === 'programme') {
+                renderProgramme();
+            }
+        }
+
+        function renderProgramme() {
+            renderDaySelector();
+            renderDayInfo();
+            renderExercises();
+        }
+
+        function renderDaySelector() {
+            const selector = document.getElementById('daySelector');
+            selector.innerHTML = days.map((d, i) => `
+                <button class="day-btn ${i === currentDay ? 'active' : ''}" onclick="selectDay(${i})">
+                    <div class="day-emoji">${d.emoji}</div>
+                    <div class="day-name">${d.day.split(' ')[0]}</div>
+                    <div style="font-size: 8px; opacity: 0.7; margin-top: 2px;">${d.label}</div>
+                </button>
+            `).join('');
+        }
+
+        function renderDayInfo() {
+            const day = days[currentDay];
+            const info = document.getElementById('dayInfo');
+            info.innerHTML = `
+                <div class="day-info">
+                    <div class="day-info-emoji">${day.emoji}</div>
+                    <div style="flex: 1;">
+                        <h2>${day.day}</h2>
+                        <div style="font-size: 11px; color: rgba(245,230,211,0.6); margin-top: 4px;">${day.exercises.length} Exercices</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderExercises() {
+            const day = days[currentDay];
+            const exercises = document.getElementById('exercises');
+            exercises.innerHTML = day.exercises.map((exo, i) => `
+                <div class="exercise ${expandedExercise === i ? 'expanded' : ''}" onclick="toggleExercise(${i})">
+                    <div class="exercise-number">${i + 1}</div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">${exo.name} ${exo.priority}</div>
+                        <div class="exercise-muscle">${exo.muscle}</div>
+                    </div>
+                    <div class="exercise-macros">${exo.sets} × ${exo.reps}</div>
+                </div>
+                ${expandedExercise === i ? `
+                    <div class="exercise-details">
+                        <div style="font-size: 13px; line-height: 1.6; margin-bottom: 12px;">${exo.desc}</div>
+                        <div class="exercise-tip">💡 ${exo.tip}</div>
+                    </div>
+                ` : ''}
+            `).join('');
+            
+            exercises.innerHTML += `
+                <div class="cardio-box">
+                    <div class="cardio-box-emoji">🚶‍♀️</div>
+                    <div>
+                        <div style="font-size: 10px; color: rgba(255, 107, 157, 0.8); text-transform: uppercase; font-weight: 600;">Cardio Post-Séance</div>
+                        <div style="font-size: 13px; font-weight: bold;">${day.cardio}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectDay(index) {
+            currentDay = index;
+            expandedExercise = null;
+            renderProgramme();
+        }
+
+        function toggleExercise(index) {
+            expandedExercise = expandedExercise === index ? null : index;
+            renderExercises();
+        }
+
+        // Initial render
+        renderProgramme();
+    </script>
+</body>
+</html>
